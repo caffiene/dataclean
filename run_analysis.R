@@ -1,3 +1,41 @@
+## run_analysis.r
+## 
+## run_analysis() reads the UCI HAR dataset, cleans the data and
+## and creates two data sets.  For more details, see README.md.
+##
+## Assumptions
+##
+## 1.  The UCI HAR Datset folder is in the current working folder.
+## 2.  2.  The library “plyr” has been installed.
+##
+## Inputs
+##
+## No inputs are provided by the user but the script will read
+## the following files.
+##
+## UCI HAR Dataset/features.txt
+## UCI HAR Dataset/activity_labels.txt
+## UCI HAR Dataset/train/X_train.txt
+## UCI HAR Dataset/train/y_train.txt
+## UCI HAR Dataset/train/subject_train.txt
+## UCI HAR Dataset/test/X_test.txt
+## UCI HAR Dataset/test/y_test.txt
+##
+## Outputs
+##
+## Two text files are generated in the current working folder:
+## 
+## bigdata.txt - Contains the merged training and test files.
+##   Only features pertaining to mean or standard deviation of
+##   measurements are retained.  All columns are labelled and
+##   activities are denoted with descriptive labels.  Each row
+##   contains an observation consisting of the subject
+##   identifier, activity label and selected features.
+## tidydata.txt - A second independent data set with the average
+##   of each selected feature for each subject and activity.
+##   For more details concerning the tidy data set, see
+##   Codebook.md.
+
 run_analysis = function(){
   
   # 'plyr' is needed to create the tidy data set
@@ -72,6 +110,4 @@ run_analysis = function(){
   # write out both data sets
   write.table(dataSet,file="./bigdata.txt",row.names=FALSE)
   write.table(tidyData,file="./tidydata.txt",row.names=FALSE)
-  
-  return(tidyData)
 }
